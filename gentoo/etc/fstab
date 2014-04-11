@@ -17,13 +17,15 @@
 
 #rw,noatime,nodiratime,background_gc_on,user_xattr,acl,active_logs=6
 
-/dev/sda2               /boot           f2fs            noauto,noatime  1 2
-/dev/sda3               /               f2fs            noatime         0 1
-/dev/sda4               /home           f2fs            noatime         0 1
+/dev/sda2               /boot           ext4            noauto,noatime,discard,barrier=0   1 2
+/dev/sda3               /               ext4            noatime,discard,barrier=0          0 1
+/dev/sda4               /home           ext4            noatime,discard,barrier=0          0 1
 # /boot/efi was on /dev/sda1 during installation
-/dev/sda1  /boot/efi       vfat    defaults        0       1
+/dev/sda1  /boot/efi       vfat    defaults        0       2
+#LABEL=efi-boot /boot/efi vfat defaults 0 2
+
 #ramdisk
 #/dev/shm /ramdisk   tmpfs   size=8g 0   0
-none  /proc proc  defaults  0 0
-none  /sys  sysfs defaults  0 0
-none  /dev/pts  devpts  gid=2,mode=620  0 0
+#none  /proc proc  defaults  0 0
+#none  /sys  sysfs defaults  0 0
+#none  /dev/pts  devpts  gid=2,mode=620  0 0
